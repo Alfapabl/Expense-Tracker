@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
+A modern and interactive Expense Tracker built with TypeScript, React.js, and Tailwind CSS. Easily manage your finances by adding and deleting expenses, visualizing your budget in a dynamic circular chart, and filtering expenses by categories.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ Features
+➕ Add expenses with category, name, date, and amount
 
-Currently, two official plugins are available:
+❌ Delete expenses with a swipe gesture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌀 View a circular progress bar showing your current budget usage
 
-## Expanding the ESLint configuration
+🔍 Filter expenses by category
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+📅 Select dates using a clean and intuitive date picker
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+🛠 Tech Stack
+React.js
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+TypeScript
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Tailwind CSS
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+React Swipeable List
+
+React Date Picker
+
+React Circular Progress Bar
+
+📦 Installation
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/expense-tracker.git
+cd expense-tracker
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+# or
+yarn install
+Start the development server:
+
+bash
+Copy
+Edit
+npm run dev
+# or
+yarn dev
+📚 Dependencies
+react-swipeable-list
+Swipe-to-delete interaction for expense items.
+
+bash
+Copy
+Edit
+npm install react-swipeable-list
+react-date-picker
+Date selection UI for adding expenses.
+
+bash
+Copy
+Edit
+npm install react-date-picker
+react-circular-progressbar
+Displays budget usage in a circular format.
+
+bash
+Copy
+Edit
+npm install react-circular-progressbar
+
+🧪 Coming Soon
+Data persistence (e.g., local storage or backend)
+
+Export reports
+
+Dark mode
