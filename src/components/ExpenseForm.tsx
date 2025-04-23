@@ -64,12 +64,8 @@ export default function ExpenseForm() {
         
         if (Object.values(formExpenses).some(val => val === '' || val === null || val === 0)) {
             setError('All Fields are required')
-        }
-        if (availableBudget < (formExpenses.amount-prevAmount)) {
-            console.log(formExpenses.amount);
-            console.log(prevAmount);
-            
-                     
+        } else if (availableBudget < (formExpenses.amount-prevAmount)) {
+                                 
             setError('Budget limit reach')
         }
         else {
@@ -104,7 +100,6 @@ export default function ExpenseForm() {
                     className=" bg-gray-100 p-2"
                     onChange={handleInputs}
                     onFocus={(e) => e.target.select()}
-                    step="0.01" 
                 />
 
                 <label htmlFor="category" className="text-xl my-1">Category</label>
