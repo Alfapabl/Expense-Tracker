@@ -4,6 +4,7 @@ import { useBudget } from "./hooks/useBudget"
 import BudgetTracker from "./components/BudgetTracker"
 import ExpenseModal from "./components/ExpenseModal"
 import ExpenseList from "./components/ExpenseList"
+import FilterExpense from "./components/FilterExpense"
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <h1 className=" text-4xl mx-full text-white py-5 uppercase font-black"> Expense Tracker</h1>
     </header>
     <div className="mx-auto h-screen max-w-3xl">
-      {budgetCheck ?  <><BudgetTracker /> <ExpenseList/></> : <BudgetForm /> }
+      {budgetCheck ?  <><BudgetTracker /> <FilterExpense /> <ExpenseList/></> : <BudgetForm /> }
     </div>
       {budgetCheck && (<ExpenseModal />)}
     </>

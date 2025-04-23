@@ -2,7 +2,7 @@ import { categories } from "../data/Categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { Value } from "react-calendar/dist/esm/shared/types.js";
 import { expenseDraft } from "../types";
 import ErrorMessage from "./ErrorMessage";
@@ -21,6 +21,8 @@ export default function ExpenseForm() {
     )
 
     const [error, setError] = useState('')
+    
+    const [prevAmount, setPrevAmount] = useState(0)
 
     const handleDate = (value: Value) => {
         setformExpenses(
@@ -32,7 +34,19 @@ export default function ExpenseForm() {
         )
     }
 
-    const {dispatch} = useBudget()
+    const {dispatch, state, availableBudget} = useBudget()
+
+    useEffect( ()=> {
+        if (state.editID) {
+            const modifyExpense = state.expense.find((editExpense)=> editExpense.id === state.editID)
+            if (modifyExpense) {
+                setformExpenses(modifyExpense)
+                setPrevAmount(modifyExpense.amount)
+            }
+            
+        }
+    } 
+    ,[state.editID])
 
     const handleInputs = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -51,16 +65,24 @@ export default function ExpenseForm() {
         if (Object.values(formExpenses).some(val => val === '' || val === null || val === 0)) {
             setError('All Fields are required')
         }
+        if (availableBudget < (formExpenses.amount-prevAmount)) {
+            console.log(formExpenses.amount);
+            console.log(prevAmount);
+            
+                     
+            setError('Budget limit reach')
+        }
         else {
             setError('')
             dispatch({type: 'add-expense', payload: {formExpenses}})
             dispatch({type: 'close-modal'})
         }
     }
+    
 
     return (
         <form onSubmit={handleSubmit}>
-            <legend className="text-4xl font-black text-center uppercase border-b-4 border-blue-500 py-5">New Expense</legend>
+            <legend className="text-4xl font-black text-center uppercase border-b-4 border-blue-500 py-5">{state.editID ?  'Edit Expense' : 'New Expense'}</legend>
             <div className="flex flex-col my-5">
                 {error && <ErrorMessage> {error} </ErrorMessage>}
 
@@ -81,6 +103,8 @@ export default function ExpenseForm() {
                     value={formExpenses.amount}
                     className=" bg-gray-100 p-2"
                     onChange={handleInputs}
+                    onFocus={(e) => e.target.select()}
+                    step="0.01" 
                 />
 
                 <label htmlFor="category" className="text-xl my-1">Category</label>
@@ -88,6 +112,7 @@ export default function ExpenseForm() {
                 id="category" 
                 className=" bg-gray-100 p-2" 
                 name="category"
+                value={formExpenses.category}
                 onChange={handleInputs}>
                     <option value="">--Select Category--</option>
                     {categories.map(category =>
@@ -108,7 +133,7 @@ export default function ExpenseForm() {
 
             <input type="submit"
                 className="bg-blue-700 uppercase text-xl w-full cursor-pointer text-white text-center p-2 rounded-xl items-center mt-1.5"
-                value='Add Expense'
+                value={state.editID ? 'Update Expense' : 'Register Expense'}
             />
 
         </form>

@@ -30,10 +30,12 @@ export default function BudgetForm() {
             type="number" 
             id="budget" 
             name='budget' 
-            placeholder="Definir Presupuesto" 
+            placeholder="set budget" 
             className="border-gray-200 p-2 border w-full"
             onChange={onChange}
             value={budget}
+            onFocus={(e) => e.target.select()}
+            min='0' 
             />
             <input type="submit" className="p-2 my-5 bg-blue-700 text-1xl text-white disabled:opacity-40" value='Define Budget' disabled={isDisable}/>
         </div>
